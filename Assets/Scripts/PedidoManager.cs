@@ -1,22 +1,22 @@
-using UnityEngine; // trae las clases
-using UnityEngine.UI; //trae Imagenes
-using TMPro; //trae texto
+using UnityEngine; 
+using UnityEngine.UI;
+using TMPro;
 
-public enum Metodo { V60, PrensaFrancesa, AeroPress, Chemex } 
-public enum Perfil { Fuerte, Equilibrado, Suave }
+public enum MetodoCafe { V60, PrensaFrancesa, AeroPress, Chemex }
+public enum PerfilCafe { Fuerte, Equilibrado, Suave }
 
 // Un pedido = qué cliente, qué método y qué perfil de café pide.
-public class Pedido
+public class PedidoCafe
 {
     public int cliente;
-    public Metodo metodo;
-    public Perfil perfil;
+    public MetodoCafe metodo;
+    public PerfilCafe perfil;
 }
 
 public class PedidoManager : MonoBehaviour
 {
     [Header("Imágenes")]
-    [SerializeField] private Sprite[] clientes;        // los 6 clientes
+    [SerializeField] private Sprite[] clientes;        // los 6 clientes 
     [SerializeField] private Sprite[] imagenesMetodo;  // V60, Prensa, AeroPress, Chemex
 
     [Header("UI del panel")]
@@ -34,7 +34,7 @@ public class PedidoManager : MonoBehaviour
     // Tiempo objetivo en segundos. Son valores de prueba: se ajustan luego.
     private static readonly int[] segundosMetodo = { 180, 240, 120, 270 };
 
-    public Pedido PedidoActual { get; private set; } //Cualquiera puede leer el pedido actual pero solo esta clase puede cambiarlo
+    public PedidoCafe PedidoActual { get; private set; }
 
     private void Start()
     {
@@ -43,11 +43,11 @@ public class PedidoManager : MonoBehaviour
 
     public void NuevoPedido()
     {
-        PedidoActual = new Pedido
+        PedidoActual = new PedidoCafe
         {
             cliente = Random.Range(0, clientes.Length),
-            metodo = (Metodo)Random.Range(0, 4),
-            perfil = (Perfil)Random.Range(0, 3)
+            metodo = (MetodoCafe)Random.Range(0, 4),
+            perfil = (PerfilCafe)Random.Range(0, 3)
         };
         MostrarPedido();
     }
